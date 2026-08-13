@@ -67,6 +67,31 @@ TGent 把 tmux 当作可持续运行的终端池，在它之上提供现代桌�
   </tr>
 </table>
 
+## 把真实终端装进口袋
+
+Android 客户端不是一个简化的 session 列表。终端始终是屏幕主体；没有实体键盘时，
+触控控制栏和根据当前程序变化的 Fn 面板会补齐移动端缺少的操作。
+
+<table>
+  <tr>
+    <td width="33.33%" align="center">
+      <img src="docs/assets/screenshots/mobile/terminal.png" alt="在 TGent Android 终端中运行 OpenCode">
+      <br><strong>终端程序仍然是主角。</strong><br>
+      全屏继续 Shell 和 coding agent，不把操作退化成远程控制列表。
+    </td>
+    <td width="33.33%" align="center">
+      <img src="docs/assets/screenshots/mobile/fn-panel.png" alt="TGent Android 客户端中随程序变化的 Fn 面板">
+      <br><strong>补齐软键盘没有的按键。</strong><br>
+      快速使用控制键、命令片段、粘贴操作和当前程序的常用命令。
+    </td>
+    <td width="33.33%" align="center">
+      <img src="docs/assets/screenshots/mobile/htop.png" alt="在 TGent Android 客户端中全屏运行 htop">
+      <br><strong>全屏 TUI 依然全屏。</strong><br>
+      在 Android 上查看进程，并直接操作交互式终端程序。
+    </td>
+  </tr>
+</table>
+
 ## 安装
 
 桌面端和 Android 安装包会陆续发布到

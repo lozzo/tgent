@@ -77,6 +77,32 @@ need a password.
   </tr>
 </table>
 
+## A real terminal in your pocket
+
+The Android client is not a reduced session list. It keeps the terminal as the
+main surface, adds a touch-friendly control row, and exposes program-aware Fn
+actions when a hardware keyboard is not available.
+
+<table>
+  <tr>
+    <td width="33.33%" align="center">
+      <img src="docs/assets/screenshots/mobile/terminal.png" alt="OpenCode running in the TGent Android terminal">
+      <br><strong>Keep terminal programs usable.</strong><br>
+      Continue shells and coding agents with the terminal filling the screen.
+    </td>
+    <td width="33.33%" align="center">
+      <img src="docs/assets/screenshots/mobile/fn-panel.png" alt="Program-aware Fn panel in the TGent Android client">
+      <br><strong>Reach the keys software keyboards miss.</strong><br>
+      Use control keys, snippets, paste actions, and commands matched to the active program.
+    </td>
+    <td width="33.33%" align="center">
+      <img src="docs/assets/screenshots/mobile/htop.png" alt="htop running full-screen in the TGent Android client">
+      <br><strong>Full-screen TUIs stay full-screen.</strong><br>
+      Monitor processes and operate interactive terminal applications from Android.
+    </td>
+  </tr>
+</table>
+
 ## Install
 
 Desktop and Android packages are published on the
