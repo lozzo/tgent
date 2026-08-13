@@ -26,6 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Linux desktop headers
+        run: sudo apt-get update && sudo apt-get install --yes libx11-dev
       - uses: actions/setup-go@v5
         with:
           go-version-file: client-go/go.mod
