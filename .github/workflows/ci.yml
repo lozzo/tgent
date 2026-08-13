@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  boundary:
+    name: Client-only boundary
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash scripts/check-client-only.sh
+      - run: bash scripts/secret-scan.sh
+
+  go:
+    name: Go client tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: client-go/go.mod
+          cache-dependency-path: |
+            client-go/go.sum
+            tgent-desktop/go.sum
+      - name: Test connection engine
+        working-directory: client-go
+        run: go test ./...
+      - name: Test desktop native layer
+        working-directory: tgent-desktop
+        run: go test ./...
+
+  shared-ui:
+    name: Shared UI builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: client-go/go.mod
+          cache: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: shared/package-lock.json
+      - name: Install dependencies
+        working-directory: shared
+        run: npm ci
+      - name: Build WebAssembly client
+        run: bash client-go/scripts/build-web-client.sh
+      - name: Typecheck
+        working-directory: shared
+        run: npm run typecheck
+      - name: Build Android Web target
+        working-directory: shared
+        run: npm run build:app
+      - name: Build desktop Web target
+        working-directory: shared
+        run: npm run build:desktop
+
+  secrets:
+    name: Gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2

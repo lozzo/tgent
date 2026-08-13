@@ -1,0 +1,20 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "tgent",
+  "outputfilename": "tgent",
+  "frontend:dir": "frontend",
+  "frontend:install": "npm run install:shared",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "wailsjsdir": "frontend",
+  "info": {
+    "companyName": "TGent",
+    "productName": "TGent",
+    "productVersion": "0.1.0",
+    "copyright": "Copyright 2026 TGent"
+  },
+  "author": {
+    "name": "lozzo"
+  }
+}

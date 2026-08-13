@@ -1,0 +1,500 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== 内嵌终端字体 (Nerd Font Mono) ===== */
+
+:root {
+  --color-bg-page: #030712;
+  --color-bg-surface: #1f2937;
+  --color-bg-elevated: #111827;
+  --color-bg-overlay: rgba(0, 0, 0, 0.50);
+  --color-border: #374151;
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-text-primary: #e5e7eb;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+  --color-term-bg: #1a1b26;
+  --color-term-fg: #a9b1d6;
+  --color-term-cursor: #c0caf5;
+}
+
+/* FiraCode Nerd Font Mono */
+@font-face {
+  font-family: 'FiraCode NF';
+  src: url('./assets/fonts/FiraCodeNerdFontMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'FiraCode NF';
+  src: url('./assets/fonts/FiraCodeNerdFontMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* JetBrains Mono Nerd Font Mono */
+@font-face {
+  font-family: 'JetBrainsMono NF';
+  src: url('./assets/fonts/JetBrainsMonoNerdFontMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrainsMono NF';
+  src: url('./assets/fonts/JetBrainsMonoNerdFontMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cascadia Code Nerd Font Mono (CaskaydiaCove) */
+@font-face {
+  font-family: 'CascadiaCode NF';
+  src: url('./assets/fonts/CaskaydiaCoveNerdFontMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CascadiaCode NF';
+  src: url('./assets/fonts/CaskaydiaCoveNerdFontMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Hack Nerd Font Mono */
+@font-face {
+  font-family: 'Hack NF';
+  src: url('./assets/fonts/HackNerdFontMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hack NF';
+  src: url('./assets/fonts/HackNerdFontMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Iosevka Nerd Font Mono */
+@font-face {
+  font-family: 'Iosevka NF';
+  src: url('./assets/fonts/IosevkaNerdFontMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Iosevka NF';
+  src: url('./assets/fonts/IosevkaNerdFontMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 输入框允许选择文本 */
+input, textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Safe area utilities — 在各页面按需使用 */
+.safe-top { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-x { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+
+/* Allow dashboard to scroll */
+body:has(.dashboard-scroll) {
+  overflow: auto;
+}
+
+.dashboard-scroll {
+  overflow: auto;
+  height: 100%;
+}
+
+.xterm {
+  height: 100%;
+  touch-action: none;
+}
+
+.xterm-screen {
+  touch-action: none;
+}
+
+.xterm-viewport {
+  overflow-y: auto !important;
+  touch-action: none;
+  overscroll-behavior: contain;
+  /* 隐藏原生滚动条，用自定义滚动条替代 */
+  scrollbar-width: none;
+}
+.xterm-viewport::-webkit-scrollbar { display: none; }
+
+/* A non-owner renders the remote tmux grid at its real cell size and pans it. */
+.tgent-terminal-viewport[data-horizontal-pan='true'] {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+}
+.tgent-terminal-viewport[data-horizontal-pan='true']::-webkit-scrollbar { display: none; }
+.tgent-terminal-viewport[data-horizontal-pan='true'] .xterm,
+.tgent-terminal-viewport[data-horizontal-pan='true'] .xterm-screen {
+  touch-action: pan-x;
+}
+
+/* ---- 终端自定义滚动条 ---- */
+.term-scrollbar-track {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  right: 2px;
+  width: 14px;
+  z-index: 10;
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.term-scrollbar-track.visible {
+  opacity: 1;
+}
+
+.term-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  min-height: 24px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  transition: width 0.15s ease, background 0.15s ease, border-radius 0.15s ease;
+  will-change: transform;
+}
+/* 按住放大：更宽、更明显 */
+.term-scrollbar-track.active .term-scrollbar-thumb {
+  width: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.xterm-helper-textarea {
+  caret-color: transparent !important;
+  opacity: 0 !important;
+}
+
+/* 键盘弹出时，将隐藏输入框固定到可见区域底部，防止浏览器滚动补偿 */
+.xterm.input-adjusted .xterm-helper-textarea {
+  top: auto !important;
+  bottom: var(--kb-input-bottom, 0px) !important;
+}
+
+/* xterm 搜索高亮样式 */
+.xterm .xterm-find-result-decoration {
+  outline: 1px solid rgba(255, 200, 0, 0.5);
+  background-color: rgba(255, 200, 0, 0.2);
+}
+.xterm .xterm-find-active-result-decoration {
+  outline: 2px solid rgba(255, 200, 0, 0.8);
+  background-color: rgba(255, 200, 0, 0.4);
+}
+
+/* 隐藏工具栏水平滚动条 */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* 输入法合成文本（语音输入等）：移动端隐藏 xterm 默认浮层，用自定义浮层替代 */
+@media (max-width: 767px) {
+  .xterm .composition-view.active {
+    opacity: 0 !important;
+  }
+  /* 限制宽度防止隐藏的 composition-view 撑宽页面 */
+  .xterm .composition-view {
+    max-width: 100% !important;
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+  }
+}
+
+/* 自定义输入法合成文本浮层 - 支持自动换行 */
+.comp-overlay {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-bg-elevated);
+  color: var(--color-term-fg);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 6px 8px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  max-height: 40vh;
+  overflow-y: auto;
+  z-index: 5;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+@keyframes modifier-locked-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.modifier-locked {
+  animation: modifier-locked-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes key-pop {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.6);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.05);
+  }
+  30% {
+    transform: translateX(-50%) scale(1);
+  }
+  75% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.9) translateY(-6px);
+  }
+}
+.animate-key-pop {
+  animation: key-pop 0.4s ease-out forwards;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* ===== 双页面栈容器 ===== */
+.page-stack {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.page-stack-layer {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  will-change: transform, opacity;
+}
+
+/* push: 新页面从右 30% 滑入 */
+@keyframes enter-right {
+  from { transform: translateX(30%); }
+  to   { transform: translateX(0); }
+}
+/* push: 旧页面向左 30% 滑出 */
+@keyframes exit-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-30%); }
+}
+/* pop: 新页面从左 30% 滑入 */
+@keyframes enter-left {
+  from { transform: translateX(-30%); }
+  to   { transform: translateX(0); }
+}
+/* pop: 旧页面向右 30% 滑出 */
+@keyframes exit-right {
+  from { transform: translateX(0); }
+  to   { transform: translateX(30%); }
+}
+/* terminal fade 动画 */
+@keyframes page-fade-in-kf {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes page-fade-out-kf {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.page-enter-right  { animation-name: enter-right;  animation-fill-mode: both; }
+.page-exit-left    { animation-name: exit-left;     animation-fill-mode: both; }
+.page-enter-left   { animation-name: enter-left;    animation-fill-mode: both; }
+.page-exit-right   { animation-name: exit-right;    animation-fill-mode: both; }
+.page-fade-in      { animation-name: page-fade-in-kf;  animation-fill-mode: both; }
+.page-fade-out     { animation-name: page-fade-out-kf; animation-fill-mode: both; }
+
+/* ===== NetworkBanner 动画 ===== */
+@keyframes banner-slide-in {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes banner-slide-out {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100%); }
+}
+.animate-banner-in  { animation: banner-slide-in 0.3s ease-out both; }
+.animate-banner-out { animation: banner-slide-out 0.3s ease-in both; }
+
+/* ===== Toast 动画 ===== */
+@keyframes toast-fade-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toast-fade-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(12px) scale(0.95); }
+}
+.animate-toast-in  { animation: toast-fade-in 0.2s ease-out both; }
+.animate-toast-out { animation: toast-fade-out 0.2s ease-in both; }
+
+/* ===== 其他动画 ===== */
+@keyframes pull-refresh-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.pull-refresh-spin {
+  animation: pull-refresh-spin 0.8s linear infinite;
+}
+
+/* ===== Action Sheet 动画 ===== */
+@keyframes action-sheet-in {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes action-sheet-out {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+@keyframes overlay-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes overlay-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+.animate-action-sheet-in  { animation: action-sheet-in 0.3s cubic-bezier(0.32, 0.72, 0, 1) both; }
+.animate-action-sheet-out { animation: action-sheet-out 0.25s cubic-bezier(0.32, 0.72, 0, 1) both; }
+.animate-overlay-in  { animation: overlay-fade-in 0.2s ease-out both; }
+.animate-overlay-out { animation: overlay-fade-out 0.2s ease-in both; }
+
+/* ===== 文件预览全屏动画 ===== */
+@keyframes preview-slide-in {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes preview-slide-out {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+.animate-preview-in  { animation: preview-slide-in 0.35s cubic-bezier(0.32, 0.72, 0, 1) both; }
+.animate-preview-out { animation: preview-slide-out 0.3s cubic-bezier(0.32, 0.72, 0, 1) both; }
+
+/* ===== 目录切换动画 ===== */
+@keyframes dir-enter-right {
+  from { transform: translateX(40%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+@keyframes dir-enter-left {
+  from { transform: translateX(-40%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+.animate-dir-forward  { animation: dir-enter-right 0.25s cubic-bezier(0.32, 0.72, 0, 1) both; }
+.animate-dir-backward { animation: dir-enter-left 0.25s cubic-bezier(0.32, 0.72, 0, 1) both; }
+
+/* ===== 选择模式底部栏动画 ===== */
+@keyframes selection-bar-in {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.animate-selection-bar-in { animation: selection-bar-in 0.25s cubic-bezier(0.32, 0.72, 0, 1) both; }
+
+/* ===== 选择放大镜 ===== */
+.sel-magnifier {
+  position: absolute;
+  pointer-events: none;
+  z-index: 100;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  overflow: hidden;
+  display: none;
+}
+.sel-anchor-marker {
+  position: absolute;
+  pointer-events: none;
+  z-index: 99;
+  width: 3px;
+  background: #58a6ff;
+  box-shadow: 0 0 6px rgba(88, 166, 255, 0.6);
+  animation: sel-anchor-blink 1s step-end infinite;
+  display: none;
+}
+@keyframes sel-anchor-blink {
+  50% { opacity: 0; }
+}
+
+/* ===== 无障碍：减少动画 ===== */
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-right,
+  .page-exit-left,
+  .page-enter-left,
+  .page-exit-right,
+  .page-fade-in,
+  .page-fade-out,
+  .animate-banner-in,
+  .animate-banner-out,
+  .animate-toast-in,
+  .animate-toast-out,
+  .animate-action-sheet-in,
+  .animate-action-sheet-out,
+  .animate-overlay-in,
+  .animate-overlay-out,
+  .animate-preview-in,
+  .animate-preview-out,
+  .animate-dir-forward,
+  .animate-dir-backward,
+  .animate-selection-bar-in {
+    animation: none;
+  }
+}
+
+/* ===== 分屏分割线 ===== */
+.split-divider {
+  background: var(--color-bg-elevated);
+  cursor: row-resize;
+}

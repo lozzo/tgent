@@ -1,0 +1,40 @@
+name: Feature request
+description: Propose a client-facing improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What client workflow is difficult today, and for whom?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the interaction and expected result.
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Primary component
+      options:
+        - Desktop app
+        - Android app
+        - Shared terminal UI
+        - Client connection engine
+        - Cross-client protocol
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: I searched existing issues and discussions for the same request.
+          required: true
+        - label: This request does not add endpoint, Hub, control-plane, or other service implementation to this repository.
+          required: true

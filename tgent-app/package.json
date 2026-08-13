@@ -1,0 +1,35 @@
+{
+  "name": "tgent-app",
+  "private": true,
+  "version": "0.1.0",
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "scripts": {
+    "build:wasm": "bash ../client-go/scripts/build-web-client.sh",
+    "shared:install": "npm --prefix ../shared install",
+    "postinstall": "npm run shared:install",
+    "predev": "npm run build:wasm",
+    "dev": "npm --prefix ../shared run dev:app",
+    "prebuild": "npm run build:wasm",
+    "build": "npm --prefix ../shared run build:app",
+    "preview": "npm --prefix ../shared exec vite preview -- --mode app",
+    "cap:sync": "npx cap sync && bash scripts/android-setup.sh"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.1.0",
+    "@capacitor/app": "^8.0.1",
+    "@capacitor/cli": "^8.1.0",
+    "@capacitor/core": "^8.1.0",
+    "@capacitor/haptics": "^8.0.0",
+    "@capacitor/ios": "^8.1.0",
+    "@capacitor/keyboard": "^8.0.0",
+    "@capacitor/network": "^8.0.1",
+    "@capacitor/preferences": "^8.0.1",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "typescript": "^5.6.3"
+  }
+}

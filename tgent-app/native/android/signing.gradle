@@ -1,0 +1,21 @@
+def signingValues = [
+    keystore: System.getenv('TGENT_ANDROID_KEYSTORE'),
+    storePassword: System.getenv('TGENT_ANDROID_STORE_PASSWORD'),
+    keyAlias: System.getenv('TGENT_ANDROID_KEY_ALIAS'),
+    keyPassword: System.getenv('TGENT_ANDROID_KEY_PASSWORD'),
+]
+
+def configuredValues = signingValues.findAll { _, value -> value != null && !value.trim().isEmpty() }
+if (!configuredValues.isEmpty() && configuredValues.size() != signingValues.size()) {
+    throw new GradleException('Android signing requires TGENT_ANDROID_KEYSTORE, TGENT_ANDROID_STORE_PASSWORD, TGENT_ANDROID_KEY_ALIAS, and TGENT_ANDROID_KEY_PASSWORD')
+}
+
+if (configuredValues.size() == signingValues.size()) {
+    android.signingConfigs.create('release') {
+        storeFile file(signingValues.keystore)
+        storePassword signingValues.storePassword
+        keyAlias signingValues.keyAlias
+        keyPassword signingValues.keyPassword
+    }
+    android.buildTypes.release.signingConfig android.signingConfigs.release
+}

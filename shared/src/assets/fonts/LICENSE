@@ -1,0 +1,16 @@
+Bundled terminal fonts
+
+The WOFF2 files in this directory are Nerd Font Mono variants. Their original
+font licenses and copyright notices are retained in the licenses/ directory:
+
+- Caskaydia Cove: licenses/CaskaydiaCove-OFL-1.1.txt
+- Fira Code: licenses/FiraCode-OFL-1.1.txt
+- Hack: licenses/Hack-MIT-Bitstream.txt
+- Iosevka: licenses/Iosevka-OFL-1.1.txt
+- JetBrains Mono: licenses/JetBrainsMono-OFL-1.1.txt
+- Nerd Fonts patching and bundled glyph sources: licenses/NerdFonts-LICENSE.txt
+
+Source project: https://github.com/ryanoasis/nerd-fonts
+
+These assets remain under their respective licenses and are not relicensed
+under TGent's AGPL license.

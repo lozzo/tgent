@@ -1,0 +1,61 @@
+name: Bug report
+description: Report a reproducible TGent client problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Remove credentials, pair codes, private hostnames, terminal contents, and personal data before submitting.
+        Security vulnerabilities belong in a private security advisory.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Client
+      options:
+        - Desktop app
+        - Android app
+        - Shared terminal UI
+        - Client connection engine
+        - File transfer
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: v0.1.0 or commit SHA
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS/version, architecture, tmux version, and connection type. Do not include private addresses.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed credentials, pair codes, private endpoints, terminal contents, and personal data.
+          required: true

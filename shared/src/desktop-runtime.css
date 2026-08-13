@@ -1,0 +1,97 @@
+.is-wails-desktop,
+.is-wails-desktop body,
+.is-wails-desktop #root {
+  background: transparent !important;
+}
+
+.desktop-startup-shell {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #e9edf2;
+  background: #090a0c;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+}
+
+.desktop-startup-shell > header {
+  --wails-draggable: drag;
+  height: 40px;
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 14px 0 72px;
+  border-bottom: 1px solid rgba(235, 239, 245, 0.065);
+  color: #a9b0ba;
+  background: #121418;
+  font-size: 12px;
+}
+
+.desktop-startup-shell > header strong { font-weight: 500; }
+
+.desktop-startup-tab-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #78a9ff;
+}
+
+.desktop-startup-shell > section {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #707985;
+  background: #0d0f12;
+  font-size: 11px;
+}
+
+.desktop-startup-shell > section svg { animation: desktop-startup-spin 0.8s linear infinite; }
+
+@keyframes desktop-startup-spin {
+  to { transform: rotate(360deg); }
+}
+
+.is-wails-desktop .tgent-desktop-terminal {
+  color: #e9edf2;
+  background: #090a0c;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+}
+
+.is-wails-desktop .tgent-desktop-terminal-header {
+  height: 40px;
+  min-height: 40px;
+  padding: 0 10px 0 72px;
+  border-color: rgba(235, 239, 245, 0.065);
+  background: #121418;
+}
+
+.is-wails-desktop .tgent-desktop-terminal-header button {
+  border-radius: 5px;
+}
+
+.is-wails-desktop .tgent-desktop-terminal main {
+  background: #0d0f12 !important;
+}
+
+.is-wails-desktop .tgent-desktop-terminal .xterm-viewport,
+.is-wails-desktop .tgent-desktop-terminal .xterm-screen {
+  background: #0d0f12 !important;
+}
+
+.is-wails-desktop .split-pane-selector-dialog {
+  width: min(560px, 100%);
+  height: min(640px, 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(235, 239, 245, 0.1);
+  border-radius: 6px;
+  background: #15171b;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.5);
+}

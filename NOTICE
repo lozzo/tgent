@@ -1,0 +1,13 @@
+TGent
+Copyright 2026 TGent contributors
+
+This distribution includes third-party software and fonts. Those components
+remain subject to their respective licenses and notices. See third_party/ for
+copied runtime and build-tool notices. Bundled font notices are retained next
+to the font assets. Dependency versions and license metadata are recorded in
+the Go module and npm package manifests and lock files. This source distribution
+contains TGent client applications only; TGent endpoint and hosted-service
+software are distributed separately.
+
+The names and logos of TGent are not licensed under the GNU Affero General
+Public License. See TRADEMARKS.md.

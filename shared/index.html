@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#030712" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>tgent</title>
+  </head>
+  <body class="bg-gray-950 text-white">
+    <div id="root"></div>
+    <script>
+      if (typeof globalThis === 'undefined') {
+        Object.defineProperty(Object.prototype, '__tgent_global_this__', {
+          get: function () { return this },
+          configurable: true
+        })
+        __tgent_global_this__.globalThis = __tgent_global_this__
+        delete Object.prototype.__tgent_global_this__
+      }
+      if (typeof queueMicrotask === 'undefined') {
+        globalThis.queueMicrotask = function (callback) {
+          Promise.resolve().then(callback)
+        }
+      }
+      if (typeof Node !== 'undefined' && !Node.prototype.replaceChildren) {
+        Node.prototype.replaceChildren = function () {
+          while (this.firstChild) this.removeChild(this.firstChild)
+          for (var i = 0; i < arguments.length; i++) {
+            var child = arguments[i]
+            this.appendChild(typeof child === 'string' ? document.createTextNode(child) : child)
+          }
+        }
+      }
+      if (!Array.prototype.values) {
+        Array.prototype.values = function () {
+          var array = this
+          var index = 0
+          var iterator = {
+            next: function () {
+              return index < array.length
+                ? { value: array[index++], done: false }
+                : { value: undefined, done: true }
+            }
+          }
+          var iteratorKey = typeof Symbol !== 'undefined' && Symbol.iterator
+            ? Symbol.iterator
+            : '@@iterator'
+          iterator[iteratorKey] = function () { return this }
+          return iterator
+        }
+      }
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
