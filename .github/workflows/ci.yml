@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Linux desktop headers
-        run: sudo apt-get update && sudo apt-get install --yes libx11-dev
+        run: sudo apt-get update && sudo apt-get install --yes libx11-dev xauth xvfb
       - uses: actions/setup-go@v5
         with:
           go-version-file: client-go/go.mod
@@ -39,7 +39,7 @@ jobs:
         run: go test ./...
       - name: Test desktop native layer
         working-directory: tgent-desktop
-        run: go test ./...
+        run: xvfb-run --auto-servernum go test ./...
 
   shared-ui:
     name: Shared UI builds
