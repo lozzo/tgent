@@ -11,11 +11,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lozzo/tgent-client/client-go/clientcore"
-	"github.com/lozzo/tgent-client/tgent-desktop/internal/clipboardimage"
-	"github.com/lozzo/tgent-client/tgent-desktop/internal/globalhotkey"
-	"github.com/lozzo/tgent-client/tgent-desktop/internal/quake"
-	"github.com/lozzo/tgent-client/tgent-desktop/internal/windowpulse"
+	"github.com/lozzo/tgent/client-go/clientcore"
+	"github.com/lozzo/tgent/tgent-desktop/internal/clipboardimage"
+	"github.com/lozzo/tgent/tgent-desktop/internal/globalhotkey"
+	"github.com/lozzo/tgent/tgent-desktop/internal/quake"
+	"github.com/lozzo/tgent/tgent-desktop/internal/windowpulse"
 	wailsruntime "github.com/wailsapp/wails/v2/pkg/runtime"
 )
 

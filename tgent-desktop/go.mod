@@ -1,9 +1,9 @@
-module github.com/lozzo/tgent-client/tgent-desktop
+module github.com/lozzo/tgent/tgent-desktop
 
 go 1.24.2
 
 require (
-	github.com/lozzo/tgent-client/client-go v0.0.0
+	github.com/lozzo/tgent/client-go v0.0.0
 	github.com/wailsapp/wails/v2 v2.12.0
 	golang.design/x/hotkey v0.6.1
 )
@@ -57,4 +57,4 @@ require (
 	golang.org/x/time v0.10.0 // indirect
 )
 
-replace github.com/lozzo/tgent-client/client-go => ../client-go
+replace github.com/lozzo/tgent/client-go => ../client-go

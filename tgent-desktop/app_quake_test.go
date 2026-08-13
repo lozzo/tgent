@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/lozzo/tgent-client/tgent-desktop/internal/globalhotkey"
-	"github.com/lozzo/tgent-client/tgent-desktop/internal/quake"
+	"github.com/lozzo/tgent/tgent-desktop/internal/globalhotkey"
+	"github.com/lozzo/tgent/tgent-desktop/internal/quake"
 )
 
 type fakeHotkeyRegistration struct {

@@ -1,87 +1,214 @@
-# TGent Clients
+<div align="center">
 
-[简体中文](README.zh-CN.md)
+# TGent
 
-TGent is a terminal workspace for people who keep long-running tmux terminals
-across a laptop, desktop, phone, and remote machines. This repository contains
-the open-source TGent client applications: the Wails desktop app, Android app,
-shared terminal UI, and the native client connection engine.
+**A terminal workspace built around tmux.**<br>
+Keep the process alive. Change the view, machine, or screen whenever you need.
 
-The TGent endpoint, Hub, hosted control plane, databases, billing code, and
-deployment infrastructure are intentionally **not included** in this
-repository. Install or operate a TGent endpoint separately, then connect these
-clients to it.
+[![CI](https://github.com/lozzo/tgent/actions/workflows/ci.yml/badge.svg)](https://github.com/lozzo/tgent/actions/workflows/ci.yml)
+[![License: AGPL v3](https://img.shields.io/badge/license-AGPL--3.0--only-2f81f7.svg)](LICENSE)
+![Platforms](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux%20%7C%20Android-30363d.svg)
+![Backend](https://img.shields.io/badge/backend-tmux-24a875.svg)
 
-## What you get
+[Download](https://github.com/lozzo/tgent/releases) · [Quick start](#quick-start) · [Build from source](#build-from-source) · [简体中文](README.zh-CN.md)
 
-- Desktop-first terminal workspace for macOS, Windows, and Linux
-- Quake Mode, tabs, splits, terminal picker, topology, and file management
-- Local same-user socket discovery without requiring account login
-- Optional remote endpoint and account connections
-- Android terminal access with native background and file-transfer support
-- One shared React/xterm UI backed by a Go WebRTC/WebSocket client engine
+</div>
 
-## Repository layout
+![TGent desktop workspace with tabs and split tmux terminals](docs/assets/screenshots/desktop-workspace.png)
 
-| Directory | Purpose |
-| --- | --- |
-| [`shared`](shared) | React, xterm, state, protocol, and shared client UI |
-| [`tgent-desktop`](tgent-desktop) | Wails v2 desktop shell and native integrations |
-| [`tgent-app`](tgent-app) | Capacitor Android shell and native integrations |
-| [`client-go`](client-go) | Client-only Go connection engine, WebAssembly, and Android C ABI |
+TGent treats tmux as a durable terminal pool and gives it a modern desktop and
+mobile workspace. Open the app and continue from the terminal you last used,
+arrange terminals into local tabs and splits, or jump to any pane by name. Your
+shells and long-running jobs stay in tmux even when a client window closes.
 
-There are no endpoint, daemon, tmux provider, Hub, control-plane, or server
-executables in this repository.
+Local use is account-free. The desktop app discovers a running TGent endpoint
+and prefers a same-user socket where supported, so a local connection does not
+need a password.
 
-## Use TGent
+> [!IMPORTANT]
+> TGent is under active development. tmux is the currently supported terminal
+> backend, and release packaging may change before the first stable release.
 
-The desktop app tries to discover an already-running local TGent endpoint when
-it starts. A local endpoint is separate software and is not launched or bundled
-by this source tree. Local access prefers a same-user Unix socket when the
-platform supports it; signing in is optional for local use.
+## Built for terminal-heavy work
 
-Prebuilt client releases will be published on the repository's
-[Releases](https://github.com/lozzo/tgent-client/releases) page. Until then,
-build from source using the instructions below.
+- **Terminal Picker** — press `Command/Ctrl + P` and fuzzy-search every terminal
+  by title, machine, session, window, or pane. Connection colors make machines
+  recognizable at a glance.
+- **Local tabs and splits** — arrange views without asking tmux to own the GUI
+  layout. Replace a view, split right or below, resize, and keep the underlying
+  terminal running.
+- **Quake Mode** — summon or hide the desktop from a global shortcut. On macOS,
+  the panel follows the pointer to the current display and Space, including
+  fullscreen Spaces.
+- **Activity watch** — see which terminals are producing output, have gone
+  quiet, or need attention. Watch long builds, logs, and coding agents without
+  keeping every pane visible.
+- **Broadcast input** — choose a set of terminals and send the same input to
+  all of them.
+- **tmux topology** — browse endpoints, sessions, windows, and panes; create,
+  rename, remove, or drag a pane into the current layout with a size preview.
+- **Files and image paste** — browse, upload, and download files. Images pasted
+  into a remote terminal are uploaded first so terminal programs receive a
+  usable remote path.
+- **Your terminal, your rules** — configure light and dark themes, terminal
+  palettes, transparency, background images, fonts, and shortcuts.
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="docs/assets/screenshots/terminal-picker.png" alt="Terminal Picker across several TGent endpoints">
+      <br><strong>Find a terminal, not a window.</strong><br>
+      Search across machines and the complete tmux identity, then replace the
+      current view without disturbing the terminal.
+    </td>
+    <td width="50%">
+      <img src="docs/assets/screenshots/tmux-topology.png" alt="tmux topology browser">
+      <br><strong>See the real tmux tree.</strong><br>
+      Work with endpoints, sessions, windows, and panes only when you need the
+      full hierarchy.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="docs/assets/screenshots/file-browser.png" alt="Remote file browser beside split terminals">
+      <br><strong>Terminal and files, in one workspace.</strong><br>
+      Browse the active endpoint without navigating away from the terminals.
+    </td>
+  </tr>
+</table>
+
+## Install
+
+Desktop and Android packages are published on the
+[Releases](https://github.com/lozzo/tgent/releases) page as they become
+available. Choose the artifact for your platform and architecture. If a package
+is not listed yet, use the source build below.
+
+| Platform | Client | Distribution |
+| --- | --- | --- |
+| macOS | Wails desktop app, including Quake Mode | Release artifact or source build |
+| Windows | Wails desktop app | Release artifact or source build |
+| Linux | Wails desktop app | Release artifact or source build |
+| Android | Capacitor app with native connection and file support | APK or source build |
+
+TGent connects to a TGent endpoint that exposes your tmux sessions. The
+endpoint can run on the same computer or another machine.
+
+## Quick start
+
+### 1. Start a local endpoint
+
+Install the separately distributed `tgent` endpoint on a machine with tmux,
+then start it locally:
+
+```bash
+tgent start --listen 127.0.0.1:8080
+```
+
+### 2. Open TGent
+
+Install a desktop release or run the client from source. TGent checks the local
+endpoint first and opens your most recent terminal. If tmux has no terminal to
+open, create one from Terminal Picker.
+
+Useful endpoint commands:
+
+```bash
+tgent status
+tgent logs -f
+tgent stop
+```
+
+## How it works
+
+```text
+Desktop / Android
+        │
+        ├── same-user socket (local)
+        └── WebRTC or WebSocket (remote)
+                    │
+              TGent endpoint
+                    │
+                   tmux
+                    │
+        sessions / windows / panes
+```
+
+tmux owns terminal lifetime. TGent owns the client experience: tabs, splits,
+appearance, shortcuts, activity state, and which view currently controls input
+and terminal size. Other views can observe the same pane without resizing it.
 
 ## Build from source
 
-Requirements:
+### Requirements
 
 - Go 1.24.2 or newer
 - Node.js 22 and npm
-- Wails CLI 2.12 for desktop builds
-- Android Studio, SDK, and NDK 27.2 for Android builds
+- tmux 3.0 or newer on the endpoint machine
+- Wails CLI 2.12 and its
+  [platform dependencies](https://wails.io/docs/v2.12.0/gettingstarted/installation/)
+- Android Studio, Android SDK, and NDK 27.2 for Android builds
+
+Clone and verify the client:
 
 ```bash
-git clone https://github.com/lozzo/tgent-client.git
-cd tgent-client
+git clone https://github.com/lozzo/tgent.git
+cd tgent
 make bootstrap
-make test
+make check
 ```
 
-Run the desktop app:
+Run the desktop client in development:
 
 ```bash
 go install github.com/wailsapp/wails/v2/cmd/wails@v2.12.0
 make dev-desktop
 ```
 
-Build targets and platform notes are documented in
-[`docs/development.md`](docs/development.md).
+Build a desktop application:
 
-## Security
+```bash
+make build-desktop
+```
 
-Never post pair codes, passwords, endpoint private keys, tokens, private
-addresses, file paths, or terminal contents in a public issue. Report
-vulnerabilities privately as described in [`SECURITY.md`](SECURITY.md).
+Build an Android debug APK:
 
-## Open source and commercial services
+```bash
+bash client-go/scripts/build-android-client.sh
+npm --prefix tgent-app run build
+npm --prefix tgent-app run cap:sync
+cd tgent-app/android
+./gradlew assembleDebug
+```
 
-The client source is licensed under
-[`AGPL-3.0-only`](LICENSE). Open source does not mean that every TGent product
-or service is free. Official hosted connectivity, managed releases, enterprise
-features, and support may be paid offerings. See
-[`COMMERCIAL.md`](COMMERCIAL.md) and [`TRADEMARKS.md`](TRADEMARKS.md).
+See [Client development](docs/development.md) for generated assets, native
+requirements, and release-signing notes.
 
-Contributions are welcome under [`CONTRIBUTING.md`](CONTRIBUTING.md).
+## Repository layout
+
+| Directory | Purpose |
+| --- | --- |
+| [`shared`](shared) | React, xterm, state, protocol, and shared client UI |
+| [`tgent-desktop`](tgent-desktop) | Wails v2 desktop shell and native OS integrations |
+| [`tgent-app`](tgent-app) | Capacitor Android shell and native integrations |
+| [`client-go`](client-go) | Go connection engine, WebAssembly, and Android C ABI |
+
+## Contributing
+
+Issues and pull requests are welcome. Start with
+[CONTRIBUTING.md](CONTRIBUTING.md), and read [SUPPORT.md](SUPPORT.md) before
+opening a usage or integration question.
+
+Do not post pair codes, passwords, tokens, private addresses, file paths, or
+terminal contents in a public issue. Report vulnerabilities privately through
+the [security policy](SECURITY.md).
+
+## License
+
+TGent client source is available under
+[GNU Affero General Public License v3.0 only](LICENSE). Open source does not
+mean every TGent product or service is provided without charge. See
+[commercial licensing](COMMERCIAL.md) and [trademark policy](TRADEMARKS.md).
+
+Optional TGent hosted connectivity can link endpoints across networks and may
+be offered as a paid service.

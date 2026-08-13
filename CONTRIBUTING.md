@@ -7,8 +7,8 @@ control-plane, billing, or deployment services are out of scope.
 ## Development setup
 
 ```bash
-git clone https://github.com/lozzo/tgent-client.git
-cd tgent-client
+git clone https://github.com/lozzo/tgent.git
+cd tgent
 make bootstrap
 make test
 ```

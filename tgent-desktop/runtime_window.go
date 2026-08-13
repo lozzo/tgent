@@ -4,9 +4,9 @@ import (
 	"context"
 	"math"
 
-	"github.com/lozzo/tgent-client/tgent-desktop/internal/quake"
-	"github.com/lozzo/tgent-client/tgent-desktop/internal/screenbounds"
-	"github.com/lozzo/tgent-client/tgent-desktop/internal/windowspace"
+	"github.com/lozzo/tgent/tgent-desktop/internal/quake"
+	"github.com/lozzo/tgent/tgent-desktop/internal/screenbounds"
+	"github.com/lozzo/tgent/tgent-desktop/internal/windowspace"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 

@@ -16,7 +16,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/lozzo/tgent-client/client-go/clientcore"
+	"github.com/lozzo/tgent/client-go/clientcore"
 )
 
 const (

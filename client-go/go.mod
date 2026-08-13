@@ -1,4 +1,4 @@
-module github.com/lozzo/tgent-client/client-go
+module github.com/lozzo/tgent/client-go
 
 go 1.24.2
 

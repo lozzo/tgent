@@ -1,9 +1,9 @@
 # Support
 
-Use GitHub Discussions for usage questions and design discussion. Use GitHub
-Issues for reproducible client bugs and scoped feature requests. Include the
-TGent client version or commit, operating system, tmux version, connection type,
-and redacted logs.
+Use GitHub Issues for reproducible client bugs, scoped feature requests, and
+focused usage questions. Search existing issues first. Include the TGent client
+version or commit, operating system, tmux version, connection type, and redacted
+logs.
 
 Questions about operating an endpoint or hosted TGent services may be redirected
 to their corresponding support channel because their implementation is not in

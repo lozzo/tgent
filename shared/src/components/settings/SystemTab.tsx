@@ -249,7 +249,7 @@ export default function SystemTab() {
 
   const handleOpenSource = () => {
     haptic()
-    const sourceURL = 'https://github.com/lozzo/tgent-client'
+    const sourceURL = 'https://github.com/lozzo/tgent'
     const openExternal = (window as any).runtime?.BrowserOpenURL
     if (typeof openExternal === 'function') {
       openExternal(sourceURL)

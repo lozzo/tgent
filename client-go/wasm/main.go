@@ -6,7 +6,7 @@ import (
 	"sync"
 	"syscall/js"
 
-	"github.com/lozzo/tgent-client/client-go/clientcore"
+	"github.com/lozzo/tgent/client-go/clientcore"
 )
 
 var engines = struct {
